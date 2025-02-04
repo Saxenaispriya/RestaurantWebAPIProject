@@ -1,0 +1,17 @@
+D:\CS\RestaurantWebAPIProject\RestaurantWebAPIProject.BO\bin\Debug\net8.0\RestaurantWebAPIProject.BO.deps.json
+D:\CS\RestaurantWebAPIProject\RestaurantWebAPIProject.BO\bin\Debug\net8.0\RestaurantWebAPIProject.BO.dll
+D:\CS\RestaurantWebAPIProject\RestaurantWebAPIProject.BO\bin\Debug\net8.0\RestaurantWebAPIProject.BO.pdb
+D:\CS\RestaurantWebAPIProject\RestaurantWebAPIProject.BO\bin\Debug\net8.0\RestaurantWebAPIProject.Common.dll
+D:\CS\RestaurantWebAPIProject\RestaurantWebAPIProject.BO\bin\Debug\net8.0\RestaurantWebAPIProject.DataAccess.dll
+D:\CS\RestaurantWebAPIProject\RestaurantWebAPIProject.BO\bin\Debug\net8.0\RestaurantWebAPIProject.Common.pdb
+D:\CS\RestaurantWebAPIProject\RestaurantWebAPIProject.BO\bin\Debug\net8.0\RestaurantWebAPIProject.DataAccess.pdb
+D:\CS\RestaurantWebAPIProject\RestaurantWebAPIProject.BO\obj\Debug\net8.0\RestaurantWebAPIProject.BO.csproj.AssemblyReference.cache
+D:\CS\RestaurantWebAPIProject\RestaurantWebAPIProject.BO\obj\Debug\net8.0\RestaurantWebAPIProject.BO.GeneratedMSBuildEditorConfig.editorconfig
+D:\CS\RestaurantWebAPIProject\RestaurantWebAPIProject.BO\obj\Debug\net8.0\RestaurantWebAPIProject.BO.AssemblyInfoInputs.cache
+D:\CS\RestaurantWebAPIProject\RestaurantWebAPIProject.BO\obj\Debug\net8.0\RestaurantWebAPIProject.BO.AssemblyInfo.cs
+D:\CS\RestaurantWebAPIProject\RestaurantWebAPIProject.BO\obj\Debug\net8.0\RestaurantWebAPIProject.BO.csproj.CoreCompileInputs.cache
+D:\CS\RestaurantWebAPIProject\RestaurantWebAPIProject.BO\obj\Debug\net8.0\Restaura.C12572DF.Up2Date
+D:\CS\RestaurantWebAPIProject\RestaurantWebAPIProject.BO\obj\Debug\net8.0\RestaurantWebAPIProject.BO.dll
+D:\CS\RestaurantWebAPIProject\RestaurantWebAPIProject.BO\obj\Debug\net8.0\refint\RestaurantWebAPIProject.BO.dll
+D:\CS\RestaurantWebAPIProject\RestaurantWebAPIProject.BO\obj\Debug\net8.0\RestaurantWebAPIProject.BO.pdb
+D:\CS\RestaurantWebAPIProject\RestaurantWebAPIProject.BO\obj\Debug\net8.0\ref\RestaurantWebAPIProject.BO.dll

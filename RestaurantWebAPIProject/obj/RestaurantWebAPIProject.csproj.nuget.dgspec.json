@@ -1,0 +1,311 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\CS\\RestaurantWebAPIProject\\RestaurantWebAPIProject\\RestaurantWebAPIProject.csproj": {}
+  },
+  "projects": {
+    "D:\\CS\\RestaurantWebAPIProject\\RestaurantWebAPIProject.BO\\RestaurantWebAPIProject.BO.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\CS\\RestaurantWebAPIProject\\RestaurantWebAPIProject.BO\\RestaurantWebAPIProject.BO.csproj",
+        "projectName": "RestaurantWebAPIProject.BO",
+        "projectPath": "D:\\CS\\RestaurantWebAPIProject\\RestaurantWebAPIProject.BO\\RestaurantWebAPIProject.BO.csproj",
+        "packagesPath": "C:\\Users\\rvsin\\.nuget\\packages\\",
+        "outputPath": "D:\\CS\\RestaurantWebAPIProject\\RestaurantWebAPIProject.BO\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\rvsin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "D:\\CS\\RestaurantWebAPIProject\\RestaurantWebAPIProject.Common\\RestaurantWebAPIProject.Common.csproj": {
+                "projectPath": "D:\\CS\\RestaurantWebAPIProject\\RestaurantWebAPIProject.Common\\RestaurantWebAPIProject.Common.csproj"
+              },
+              "D:\\CS\\RestaurantWebAPIProject\\RestaurantWebAPIProject.DataAccess\\RestaurantWebAPIProject.DataAccess.csproj": {
+                "projectPath": "D:\\CS\\RestaurantWebAPIProject\\RestaurantWebAPIProject.DataAccess\\RestaurantWebAPIProject.DataAccess.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.100"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\CS\\RestaurantWebAPIProject\\RestaurantWebAPIProject.Common\\RestaurantWebAPIProject.Common.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\CS\\RestaurantWebAPIProject\\RestaurantWebAPIProject.Common\\RestaurantWebAPIProject.Common.csproj",
+        "projectName": "RestaurantWebAPIProject.Common",
+        "projectPath": "D:\\CS\\RestaurantWebAPIProject\\RestaurantWebAPIProject.Common\\RestaurantWebAPIProject.Common.csproj",
+        "packagesPath": "C:\\Users\\rvsin\\.nuget\\packages\\",
+        "outputPath": "D:\\CS\\RestaurantWebAPIProject\\RestaurantWebAPIProject.Common\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\rvsin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.100"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\CS\\RestaurantWebAPIProject\\RestaurantWebAPIProject.DataAccess\\RestaurantWebAPIProject.DataAccess.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\CS\\RestaurantWebAPIProject\\RestaurantWebAPIProject.DataAccess\\RestaurantWebAPIProject.DataAccess.csproj",
+        "projectName": "RestaurantWebAPIProject.DataAccess",
+        "projectPath": "D:\\CS\\RestaurantWebAPIProject\\RestaurantWebAPIProject.DataAccess\\RestaurantWebAPIProject.DataAccess.csproj",
+        "packagesPath": "C:\\Users\\rvsin\\.nuget\\packages\\",
+        "outputPath": "D:\\CS\\RestaurantWebAPIProject\\RestaurantWebAPIProject.DataAccess\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\rvsin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "D:\\CS\\RestaurantWebAPIProject\\RestaurantWebAPIProject.Common\\RestaurantWebAPIProject.Common.csproj": {
+                "projectPath": "D:\\CS\\RestaurantWebAPIProject\\RestaurantWebAPIProject.Common\\RestaurantWebAPIProject.Common.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.100"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\CS\\RestaurantWebAPIProject\\RestaurantWebAPIProject\\RestaurantWebAPIProject.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\CS\\RestaurantWebAPIProject\\RestaurantWebAPIProject\\RestaurantWebAPIProject.csproj",
+        "projectName": "RestaurantWebAPIProject",
+        "projectPath": "D:\\CS\\RestaurantWebAPIProject\\RestaurantWebAPIProject\\RestaurantWebAPIProject.csproj",
+        "packagesPath": "C:\\Users\\rvsin\\.nuget\\packages\\",
+        "outputPath": "D:\\CS\\RestaurantWebAPIProject\\RestaurantWebAPIProject\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\rvsin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "D:\\CS\\RestaurantWebAPIProject\\RestaurantWebAPIProject.BO\\RestaurantWebAPIProject.BO.csproj": {
+                "projectPath": "D:\\CS\\RestaurantWebAPIProject\\RestaurantWebAPIProject.BO\\RestaurantWebAPIProject.BO.csproj"
+              },
+              "D:\\CS\\RestaurantWebAPIProject\\RestaurantWebAPIProject.Common\\RestaurantWebAPIProject.Common.csproj": {
+                "projectPath": "D:\\CS\\RestaurantWebAPIProject\\RestaurantWebAPIProject.Common\\RestaurantWebAPIProject.Common.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.100"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.6.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
