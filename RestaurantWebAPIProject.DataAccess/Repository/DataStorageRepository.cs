@@ -77,17 +77,17 @@ namespace RestaurantWebAPIProject.DataAccess.Repository
         public void initMenu()
         {
             var itemList = new List<string>(){
-                "No food", "Dal Fry", "Rice", "Kadhai Panner"
+                 "Dal Fry", "Rice", "Kadhai Panner"
             };
 
             var foodPriceList = new List<int>(){
-             0,100, 200, 400
+             100, 200, 400
             };
 
             for (int i = 0; i < itemList.Count; i++)
             {
                 Fooditem foodItem = new Fooditem();
-                foodItem.foodItemId = i;
+                foodItem.foodItemId = i+1;
                 foodItem.foodItemName = itemList[i];
                 foodItem.foodPrice = foodPriceList[i];
                 mydictfooditem.Add(i, foodItem);

@@ -10,6 +10,7 @@ D:\CS\RestaurantWebAPIProject\RestaurantWebAPIProject.BO\obj\Debug\net8.0\Restau
 D:\CS\RestaurantWebAPIProject\RestaurantWebAPIProject.BO\obj\Debug\net8.0\RestaurantWebAPIProject.BO.AssemblyInfoInputs.cache
 D:\CS\RestaurantWebAPIProject\RestaurantWebAPIProject.BO\obj\Debug\net8.0\RestaurantWebAPIProject.BO.AssemblyInfo.cs
 D:\CS\RestaurantWebAPIProject\RestaurantWebAPIProject.BO\obj\Debug\net8.0\RestaurantWebAPIProject.BO.csproj.CoreCompileInputs.cache
+D:\CS\RestaurantWebAPIProject\RestaurantWebAPIProject.BO\obj\Debug\net8.0\RestaurantWebAPIProject.BO.sourcelink.json
 D:\CS\RestaurantWebAPIProject\RestaurantWebAPIProject.BO\obj\Debug\net8.0\Restaura.C12572DF.Up2Date
 D:\CS\RestaurantWebAPIProject\RestaurantWebAPIProject.BO\obj\Debug\net8.0\RestaurantWebAPIProject.BO.dll
 D:\CS\RestaurantWebAPIProject\RestaurantWebAPIProject.BO\obj\Debug\net8.0\refint\RestaurantWebAPIProject.BO.dll

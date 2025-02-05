@@ -1,5 +1,6 @@
 .vs/
+bin/
+obj/
 *.dll
 *.pdb
 *.json
-bin/

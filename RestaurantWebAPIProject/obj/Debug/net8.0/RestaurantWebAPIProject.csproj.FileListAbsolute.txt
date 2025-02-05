@@ -24,6 +24,7 @@ D:\CS\RestaurantWebAPIProject\RestaurantWebAPIProject\obj\Debug\net8.0\Restauran
 D:\CS\RestaurantWebAPIProject\RestaurantWebAPIProject\obj\Debug\net8.0\RestaurantWebAPIProject.csproj.CoreCompileInputs.cache
 D:\CS\RestaurantWebAPIProject\RestaurantWebAPIProject\obj\Debug\net8.0\RestaurantWebAPIProject.MvcApplicationPartsAssemblyInfo.cs
 D:\CS\RestaurantWebAPIProject\RestaurantWebAPIProject\obj\Debug\net8.0\RestaurantWebAPIProject.MvcApplicationPartsAssemblyInfo.cache
+D:\CS\RestaurantWebAPIProject\RestaurantWebAPIProject\obj\Debug\net8.0\RestaurantWebAPIProject.sourcelink.json
 D:\CS\RestaurantWebAPIProject\RestaurantWebAPIProject\obj\Debug\net8.0\scopedcss\bundle\RestaurantWebAPIProject.styles.css
 D:\CS\RestaurantWebAPIProject\RestaurantWebAPIProject\obj\Debug\net8.0\staticwebassets.build.json
 D:\CS\RestaurantWebAPIProject\RestaurantWebAPIProject\obj\Debug\net8.0\staticwebassets.development.json

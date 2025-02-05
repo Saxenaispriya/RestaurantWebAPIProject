@@ -8,6 +8,7 @@ D:\CS\RestaurantWebAPIProject\RestaurantWebAPIProject.DataAccess\obj\Debug\net8.
 D:\CS\RestaurantWebAPIProject\RestaurantWebAPIProject.DataAccess\obj\Debug\net8.0\RestaurantWebAPIProject.DataAccess.AssemblyInfoInputs.cache
 D:\CS\RestaurantWebAPIProject\RestaurantWebAPIProject.DataAccess\obj\Debug\net8.0\RestaurantWebAPIProject.DataAccess.AssemblyInfo.cs
 D:\CS\RestaurantWebAPIProject\RestaurantWebAPIProject.DataAccess\obj\Debug\net8.0\RestaurantWebAPIProject.DataAccess.csproj.CoreCompileInputs.cache
+D:\CS\RestaurantWebAPIProject\RestaurantWebAPIProject.DataAccess\obj\Debug\net8.0\RestaurantWebAPIProject.DataAccess.sourcelink.json
 D:\CS\RestaurantWebAPIProject\RestaurantWebAPIProject.DataAccess\obj\Debug\net8.0\Restaura.A776E692.Up2Date
 D:\CS\RestaurantWebAPIProject\RestaurantWebAPIProject.DataAccess\obj\Debug\net8.0\RestaurantWebAPIProject.DataAccess.dll
 D:\CS\RestaurantWebAPIProject\RestaurantWebAPIProject.DataAccess\obj\Debug\net8.0\refint\RestaurantWebAPIProject.DataAccess.dll
