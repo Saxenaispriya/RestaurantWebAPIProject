@@ -87,7 +87,7 @@ namespace RestaurantWebAPIProject.DataAccess.Repository
             for (int i = 0; i < itemList.Count; i++)
             {
                 Fooditem foodItem = new Fooditem();
-                foodItem.foodItemId = i+1;
+                foodItem.foodItemId = i;
                 foodItem.foodItemName = itemList[i];
                 foodItem.foodPrice = foodPriceList[i];
                 mydictfooditem.Add(i, foodItem);

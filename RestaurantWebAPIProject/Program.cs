@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.HttpLogging;
+using Microsoft.AspNetCore.Routing.Matching;
 using RestaurantWebAPIProject.BO.Implementation;
 using RestaurantWebAPIProject.BO.Interface;
 using RestaurantWebAPIProject.DataAccess.Repository;
@@ -18,6 +19,17 @@ builder.Services.AddSingleton<IDataStorageRepository,DataStorageRepository>();//
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+// Add CORS configuration
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowLocalhost",
+        policy =>
+        {
+            // Allow your frontend to make requests from localhost (adjust if needed)
+            policy.WithOrigins("https://localhost:7156").AllowAnyHeader().AllowAnyMethod();// Your frontend's URL
+        });
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -46,6 +58,9 @@ if (app.Environment.IsDevelopment())
 app.UseHttpLogging();
 
 app.UseHttpsRedirection();
+
+// Enable CORS globally
+app.UseCors("AllowLocalhost");
 
 app.UseAuthorization();
 
