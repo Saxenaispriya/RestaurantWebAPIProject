@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 using Formatting = Newtonsoft.Json.Formatting;
 using JsonSerializer = Newtonsoft.Json.JsonSerializer;
 using RestaurantWebAPIProject.DataAccess.Repository;
+using RestaurantWebAPIProject.Common.Dtos;
 
 
 namespace RestaurantWebAPIProject.BO.Implementation
@@ -24,7 +25,7 @@ namespace RestaurantWebAPIProject.BO.Implementation
             _IdataStorageRepository = dataStorageService;
         }
 
-        public void Do_Orders(orderRequestPayload orderRequestPayload)
+        public void Do_Orders(OrderRequestDto orderRequestPayload)
         {
             if (_IdataStorageRepository.doesTableExist(orderRequestPayload.tablenumber))
             {
@@ -91,7 +92,7 @@ namespace RestaurantWebAPIProject.BO.Implementation
             return fd.fooditemlist;
         }
 
-        public void addTable(tableRequestPayload tableRequestPayload)
+        public void addTable(TableRequestDto tableRequestPayload)
         {
             Table t = new Table();
             t.tableNumber = tableRequestPayload.tableNumber;
@@ -99,7 +100,7 @@ namespace RestaurantWebAPIProject.BO.Implementation
             _IdataStorageRepository.AddTable(tableRequestPayload.tableNumber,t);
         }
 
-        public void addFoodItem(foodItemRequestPayload foodItemRequestPayload)
+        public void addFoodItem(FoodItemRequestDto foodItemRequestPayload)
         {
             Fooditem fd=new Fooditem();
             fd.foodItemId = foodItemRequestPayload.foodItemId;

@@ -1,4 +1,5 @@
-﻿using RestaurantWebAPIProject.Common.Models;
+﻿using RestaurantWebAPIProject.Common.Dtos;
+using RestaurantWebAPIProject.Common.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +14,9 @@ namespace RestaurantWebAPIProject.BO.Interface
         void removeFooditem(int _fooditem);
         List<Table> showAvailableTables();
         List<Fooditem> showMenuesItem();
-        void Do_Orders(orderRequestPayload orderRequestPayload);
+        void Do_Orders(OrderRequestDto orderRequestPayload);
         int generateBill(int _tablenumber);
-        void addTable(tableRequestPayload tableRequestPayload);
-        void addFoodItem(foodItemRequestPayload foodItemRequestPayload);
+        void addTable(TableRequestDto tableRequestPayload);
+        void addFoodItem(FoodItemRequestDto foodItemRequestPayload);
     }
 }

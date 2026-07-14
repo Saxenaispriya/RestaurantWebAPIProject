@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RestaurantWebAPIProject.BO.Interface;
 using RestaurantWebAPIProject.Common.Models;
+using RestaurantWebAPIProject.Common.Dtos;
 
 namespace RestaurantWebAPIProject.Controllers
 {
@@ -15,21 +16,21 @@ namespace RestaurantWebAPIProject.Controllers
         }
 
         [HttpPost("do_OrderRoute")]
-        public IActionResult do_Order([FromBody] orderRequestPayload orderRequestPayload)
+        public IActionResult do_Order([FromBody] OrderRequestDto orderRequestPayload)
         {
             _restaurantService.Do_Orders(orderRequestPayload);
             return Ok();
         }
 
         [HttpPost("addTableRoute")]
-        public IActionResult addTable([FromBody] tableRequestPayload tableRequestPayload)
+        public IActionResult addTable([FromBody] TableRequestDto tableRequestPayload)
         {
             _restaurantService.addTable(tableRequestPayload);
             return Ok();
         }
 
         [HttpPost("addFoodItemRoute")]
-        public IActionResult addFoodItem([FromBody] foodItemRequestPayload foodItemRequestPayload)
+        public IActionResult addFoodItem([FromBody] FoodItemRequestDto foodItemRequestPayload)
         {
            _restaurantService.addFoodItem(foodItemRequestPayload);
            return Ok();
