@@ -1,4 +1,14 @@
+# Visual Studio
 .vs/
-obj/
-RestaurantWebAPIProject/obj/Debug/net8.0/RestaurantWebAPIProject.AssemblyInfoInputs.cache
-RestaurantWebAPIProject/obj/Debug/net8.0/RestaurantWebAPIProject.csproj.AssemblyReference.cache
+
+# Build output
+**/bin/
+**/obj/
+
+# User-specific files
+*.user
+*.suo
+*.rsuser
+
+# Logs
+*.log
