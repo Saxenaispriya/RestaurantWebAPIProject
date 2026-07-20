@@ -2,11 +2,13 @@ using Microsoft.AspNetCore.HttpLogging;
 using RestaurantWebAPIProject.BO.Implementation;
 using RestaurantWebAPIProject.BO.Interface;
 using RestaurantWebAPIProject.DataAccess.Repository;
+using RestaurantWebAPIProject.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<IRestaurantService, RestaurantService>();//add service class
 builder.Services.AddSingleton<IDataStorageRepository,DataStorageRepository>();//for storage
+builder.Services.AddTransient<GlobalExceptionMiddleware>();
 
 //builder.Services.AddControllers()
 //    .AddNewtonsoftJson(options =>
@@ -46,8 +48,9 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
+app.UseMiddleware<GlobalExceptionMiddleware>();
+
 app.UseCors("AllowAngularApp");
-app.MapControllers();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

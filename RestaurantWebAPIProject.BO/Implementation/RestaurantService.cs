@@ -12,6 +12,7 @@ using Formatting = Newtonsoft.Json.Formatting;
 using JsonSerializer = Newtonsoft.Json.JsonSerializer;
 using RestaurantWebAPIProject.DataAccess.Repository;
 using RestaurantWebAPIProject.Common.Dtos;
+using RestaurantWebAPIProject.Common.Exceptions;
 
 
 namespace RestaurantWebAPIProject.BO.Implementation
@@ -41,18 +42,29 @@ namespace RestaurantWebAPIProject.BO.Implementation
         public int generateBill(int _tablenumber)
         {
             int sum = 0;
-            if (_IdataStorageRepository.doesTableExist(_tablenumber))
+
+            if (!_IdataStorageRepository.doesTableExist(_tablenumber))
             {
+                throw new NotFoundException("Table does not exist");
+            }
                 Table t = _IdataStorageRepository.getTableByTableNumber(_tablenumber);
+
+                if(t.orderlist==null || t.orderlist.Count==0)
+                {
+                    throw new BadRequestException("No order found for this table");
+                }
+
                 foreach (Order or in t.orderlist)
                 {
-                    if (_IdataStorageRepository.doesFoodExist(or._fooditemNumber))
+                    if (!_IdataStorageRepository.doesFoodExist(or._fooditemNumber))
                     {
-                        Fooditem fditm = _IdataStorageRepository.getFoodItemByFoodItemNumber(or._fooditemNumber);
-                        sum += fditm.foodPrice * or._quantity;
+                        throw new BadRequestException("Food Item not found");
                     }
+
+                    Fooditem fditm = _IdataStorageRepository.getFoodItemByFoodItemNumber(or._fooditemNumber);
+                    sum += fditm.foodPrice * or._quantity;
                 }
-            }
+            
             return sum;
         }
 
@@ -94,6 +106,11 @@ namespace RestaurantWebAPIProject.BO.Implementation
 
         public void addTable(TableRequestDto tableRequestPayload)
         {
+            if(_IdataStorageRepository.doesTableExist(tableRequestPayload.tableNumber))
+            {
+                throw new BadRequestException("Table Id is already exist");
+            }
+
             Table t = new Table();
             t.tableNumber = tableRequestPayload.tableNumber;
             t.isTableOccupied = false;
@@ -102,10 +119,16 @@ namespace RestaurantWebAPIProject.BO.Implementation
 
         public void addFoodItem(FoodItemRequestDto foodItemRequestPayload)
         {
+            if(_IdataStorageRepository.doesFoodExist(foodItemRequestPayload.foodItemId))
+            {
+                throw new BadRequestException("Food Item Id already exist");
+            }
+
             Fooditem fd=new Fooditem();
             fd.foodItemId = foodItemRequestPayload.foodItemId;
             fd.foodItemName=foodItemRequestPayload.foodName;
             fd.foodPrice= foodItemRequestPayload.foodPrice;
+
             _IdataStorageRepository.AddFood(foodItemRequestPayload.foodItemId,fd);
         }
     }
