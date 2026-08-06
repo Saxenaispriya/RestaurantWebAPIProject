@@ -18,5 +18,7 @@ namespace RestaurantWebAPIProject.BO.Interface
         int generateBill(int _tablenumber);
         void addTable(TableRequestDto tableRequestPayload);
         void addFoodItem(FoodItemRequestDto foodItemRequestPayload);
+
+        void CompletePayment(int tableNumber);
     }
 }

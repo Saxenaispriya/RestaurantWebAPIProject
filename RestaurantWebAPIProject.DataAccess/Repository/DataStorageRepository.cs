@@ -11,6 +11,7 @@ namespace RestaurantWebAPIProject.DataAccess.Repository
     {
         private Dictionary<int, Fooditem> mydictfooditem = new Dictionary<int, Fooditem>();
         private Dictionary<int, Table> mydicttable = new Dictionary<int, Table>();
+        private int _lastOrderId = 0;
         public DataStorageRepository()
         {
             initMenu();
@@ -102,6 +103,12 @@ namespace RestaurantWebAPIProject.DataAccess.Repository
                 t.isTableOccupied = false;
                 mydicttable.Add(i, t);
             }
+        }
+
+        public int GetNextOrderId()
+        {
+            _lastOrderId++;
+            return _lastOrderId;
         }
 
 

@@ -10,6 +10,6 @@ namespace RestaurantWebAPIProject.Common.Dtos
     public class OrderRequestDto
     {
         public int tablenumber { get; set; }
-        public List<Order> orderslst { get; set; }
+        public List<OrderItemsRequestDto> orderslst { get; set; }
     }
 }

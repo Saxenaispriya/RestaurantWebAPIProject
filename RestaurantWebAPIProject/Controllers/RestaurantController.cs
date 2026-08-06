@@ -76,5 +76,14 @@ namespace RestaurantWebAPIProject.Controllers
             return Ok();
         }
 
+
+        [HttpPost("completePaymentRoute")]
+        public IActionResult CompletePayment(int tableNumber)
+        {
+            _restaurantService.CompletePayment(tableNumber);
+
+            return Ok(new {message="Payment Completed Successfully"});
+        }
+
     }
 }

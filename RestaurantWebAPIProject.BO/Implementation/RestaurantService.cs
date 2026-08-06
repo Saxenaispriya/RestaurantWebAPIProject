@@ -13,6 +13,7 @@ using JsonSerializer = Newtonsoft.Json.JsonSerializer;
 using RestaurantWebAPIProject.DataAccess.Repository;
 using RestaurantWebAPIProject.Common.Dtos;
 using RestaurantWebAPIProject.Common.Exceptions;
+using System.Collections;
 
 
 namespace RestaurantWebAPIProject.BO.Implementation
@@ -28,15 +29,53 @@ namespace RestaurantWebAPIProject.BO.Implementation
 
         public void Do_Orders(OrderRequestDto orderRequestPayload)
         {
-            if (_IdataStorageRepository.doesTableExist(orderRequestPayload.tablenumber))
+            if (!_IdataStorageRepository.doesTableExist(orderRequestPayload.tablenumber))
             {
-                Table t = _IdataStorageRepository.getTableByTableNumber(orderRequestPayload.tablenumber);
-                foreach (Order or in orderRequestPayload.orderslst)
-                {
-                    t.orderlist.Add(or);
-                    t.isTableOccupied = true;
-                }
+                throw new NotFoundException("Table does not exist");
+
+               
             }
+
+            Table t = _IdataStorageRepository.getTableByTableNumber(orderRequestPayload.tablenumber);
+
+
+            if(orderRequestPayload.orderslst==null || orderRequestPayload.orderslst.Count==0) 
+            {
+                throw new BadRequestException("Please add at least one food item");
+            }
+
+            int orderId;
+
+            if(t.orderlist==null || t.orderlist.Count==0)
+            {
+                orderId = _IdataStorageRepository.GetNextOrderId();
+            }
+            else
+            {
+                orderId = t.orderlist[0].orderId;
+            }
+
+            foreach(OrderItemsRequestDto orderIncomingOrder in orderRequestPayload.orderslst)
+            {
+                Order? existingOrderItem = t.orderlist.FirstOrDefault(item => item._fooditemNumber == orderIncomingOrder._foodItemNumber);
+
+                if(existingOrderItem!=null)
+                {
+                    existingOrderItem._quantity = existingOrderItem._quantity + orderIncomingOrder._quantity;
+                }
+                else
+                {
+                    Order newOrderItem = new Order
+                    {
+                        orderId = orderId, _fooditemNumber = orderIncomingOrder._foodItemNumber, _quantity = orderIncomingOrder._quantity
+                    };
+
+                    t.orderlist.Add(newOrderItem);
+                }
+                   
+            }
+            t.isTableOccupied = true;
+
         }
 
         public int generateBill(int _tablenumber)
@@ -130,6 +169,24 @@ namespace RestaurantWebAPIProject.BO.Implementation
             fd.foodPrice= foodItemRequestPayload.foodPrice;
 
             _IdataStorageRepository.AddFood(foodItemRequestPayload.foodItemId,fd);
+        }
+
+        public void CompletePayment(int tableNumber)
+        {
+            if(!_IdataStorageRepository.doesTableExist(tableNumber))
+            {
+                throw new NotFoundException("Table does not exist");
+            }
+
+            Table table = _IdataStorageRepository.getTableByTableNumber(tableNumber);
+
+            if(table.orderlist==null || table.orderlist.Count==0)
+            {
+                throw new BadRequestException("No Active Order found for this table");
+            }
+
+            table.orderlist.Clear();
+            table.isTableOccupied = false;
         }
     }
 }

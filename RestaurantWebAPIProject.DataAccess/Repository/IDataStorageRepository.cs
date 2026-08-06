@@ -26,5 +26,7 @@ namespace RestaurantWebAPIProject.DataAccess.Repository
         void removeTableByTableNumber(int tablenumber);
         void initMenu();
         void initTables();
+
+        int GetNextOrderId();
     }
 }
