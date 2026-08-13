@@ -62,18 +62,26 @@ namespace RestaurantWebAPIProject.Controllers
             return Ok(payment);
         }
 
-        [HttpDelete("deletetableRoute")]
-        public IActionResult deleteTable([FromQuery] int _tablenumber)
-        {
-            _restaurantService.removeTable(_tablenumber);
-            return Ok();
-        }
+        //[HttpDelete("deletetableRoute")]
+        //public IActionResult deleteTable([FromQuery] int _tablenumber)
+        //{
+        //    _restaurantService.removeTable(_tablenumber);
+        //    return Ok();
+        //}
 
-        [HttpDelete("deleteFoodItemRoute")]
-        public IActionResult deleteFoodItem([FromQuery] int _fooditem)
+        //[HttpDelete("deleteFoodItemRoute")]
+        //public IActionResult deleteFoodItem([FromQuery] int _fooditem)
+        //{
+        //    _restaurantService.removeFooditem(_fooditem);
+        //    return Ok();
+        //}
+
+        [HttpGet("getOrderRoute")]
+        public IActionResult GetOrder(int tableNumber)
         {
-            _restaurantService.removeFooditem(_fooditem);
-            return Ok();
+            var order = _restaurantService.GetActiveOrder(tableNumber);
+
+            return Ok(order);
         }
 
 
@@ -82,7 +90,7 @@ namespace RestaurantWebAPIProject.Controllers
         {
             _restaurantService.CompletePayment(tableNumber);
 
-            return Ok(new {message="Payment Completed Successfully"});
+            return Ok(new { message = "Payment Completed Successfully" });
         }
 
     }

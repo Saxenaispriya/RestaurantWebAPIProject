@@ -9,9 +9,6 @@ namespace RestaurantWebAPIProject.Common.Dtos
 {
     public class FoodItemRequestDto
     {
-        [Range(1, int.MaxValue, ErrorMessage = "Food Item Id should be greater than 0")]
-        public int foodItemId { get; set; }
-
         [Required(ErrorMessage ="food name is required.")]
         public string foodName { get; set; }
 

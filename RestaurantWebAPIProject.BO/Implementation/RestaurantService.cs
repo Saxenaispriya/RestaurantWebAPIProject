@@ -14,6 +14,7 @@ using RestaurantWebAPIProject.DataAccess.Repository;
 using RestaurantWebAPIProject.Common.Dtos;
 using RestaurantWebAPIProject.Common.Exceptions;
 using System.Collections;
+using RestaurantWebAPIProject.Common.Models.Entities;
 
 
 namespace RestaurantWebAPIProject.BO.Implementation
@@ -29,118 +30,106 @@ namespace RestaurantWebAPIProject.BO.Implementation
 
         public void Do_Orders(OrderRequestDto orderRequestPayload)
         {
-            if (!_IdataStorageRepository.doesTableExist(orderRequestPayload.tablenumber))
+            RestaurantTable table = _IdataStorageRepository.getTableByTableNumber(orderRequestPayload.tablenumber);
+
+            if(table==null)
             {
                 throw new NotFoundException("Table does not exist");
-
-               
             }
 
-            Table t = _IdataStorageRepository.getTableByTableNumber(orderRequestPayload.tablenumber);
-
-
-            if(orderRequestPayload.orderslst==null || orderRequestPayload.orderslst.Count==0) 
+            if (orderRequestPayload.orderslst == null || orderRequestPayload.orderslst.Count == 0)
             {
                 throw new BadRequestException("Please add at least one food item");
             }
 
-            int orderId;
+            Common.Models.Entities.Order? order = _IdataStorageRepository.GetActiveOrder(table.TableId);
 
-            if(t.orderlist==null || t.orderlist.Count==0)
+            if (order == null)
             {
-                orderId = _IdataStorageRepository.GetNextOrderId();
-            }
-            else
-            {
-                orderId = t.orderlist[0].orderId;
-            }
-
-            foreach(OrderItemsRequestDto orderIncomingOrder in orderRequestPayload.orderslst)
-            {
-                Order? existingOrderItem = t.orderlist.FirstOrDefault(item => item._fooditemNumber == orderIncomingOrder._foodItemNumber);
-
-                if(existingOrderItem!=null)
+                order = new Common.Models.Entities.Order()
                 {
-                    existingOrderItem._quantity = existingOrderItem._quantity + orderIncomingOrder._quantity;
+                    RestaurantTableId= table.TableId,
+                    Status="Active"
+                };
+                _IdataStorageRepository.AddOrder(order);
+            }
+
+            foreach (OrderItemsRequestDto orderIncomingOrder in orderRequestPayload.orderslst)
+            {
+                OrderItem? existingItem = order.OrderItems.FirstOrDefault(item => item.FoodItemId == orderIncomingOrder._foodItemNumber);
+
+                if (existingItem != null)
+                {
+                    existingItem.Quantity += orderIncomingOrder._quantity;
                 }
                 else
                 {
-                    Order newOrderItem = new Order
+                    OrderItem newItem = new OrderItem
                     {
-                        orderId = orderId, _fooditemNumber = orderIncomingOrder._foodItemNumber, _quantity = orderIncomingOrder._quantity
+                        OrderId = order.OrderId,
+                        FoodItemId = orderIncomingOrder._foodItemNumber,
+                        Quantity = orderIncomingOrder._quantity
                     };
 
-                    t.orderlist.Add(newOrderItem);
+                    order.OrderItems.Add(newItem);
                 }
-                   
             }
-            t.isTableOccupied = true;
 
+            table.IsTableOccupied = true;
+
+            _IdataStorageRepository.SaveChanges();
         }
 
         public int generateBill(int _tablenumber)
         {
-            int sum = 0;
+            RestaurantTable table = _IdataStorageRepository.getTableByTableNumber(_tablenumber);
 
-            if (!_IdataStorageRepository.doesTableExist(_tablenumber))
+            if(table==null)
             {
                 throw new NotFoundException("Table does not exist");
             }
-                Table t = _IdataStorageRepository.getTableByTableNumber(_tablenumber);
 
-                if(t.orderlist==null || t.orderlist.Count==0)
-                {
-                    throw new BadRequestException("No order found for this table");
-                }
+            Common.Models.Entities.Order order = _IdataStorageRepository.GetActiveOrder(table.TableId);
 
-                foreach (Order or in t.orderlist)
-                {
-                    if (!_IdataStorageRepository.doesFoodExist(or._fooditemNumber))
-                    {
-                        throw new BadRequestException("Food Item not found");
-                    }
+            if(order==null)
+            {
+                throw new BadRequestException("No active order for this table");
+            }
 
-                    Fooditem fditm = _IdataStorageRepository.getFoodItemByFoodItemNumber(or._fooditemNumber);
-                    sum += fditm.foodPrice * or._quantity;
-                }
-            
-            return sum;
+            int totalAmount = 0;
+
+            foreach (OrderItem item in order.OrderItems)
+            {
+                totalAmount += item.Quantity * item.FoodItem.FoodPrice;
+            }
+
+            return totalAmount;
         }
 
-        public void removeFooditem(int _fooditem)
+        //public void removeFooditem(int _fooditem)
+        //{
+        //    if (_IdataStorageRepository.doesFoodExist(_fooditem))
+        //    {
+        //        _IdataStorageRepository.removeFoodItemByFoodItemNumber(_fooditem);
+        //    }
+        //}
+
+        //public void removeTable(int _tablenumber)
+        //{
+        //    if (_IdataStorageRepository.doesTableExist(_tablenumber))
+        //    {
+        //        _IdataStorageRepository.removeTableByTableNumber(_tablenumber);
+        //    }
+        //}
+
+        public List<RestaurantTable> showAvailableTables()
         {
-            if (_IdataStorageRepository.doesFoodExist(_fooditem))
-            {
-                _IdataStorageRepository.removeFoodItemByFoodItemNumber(_fooditem);
-            }
+            return _IdataStorageRepository.GetTable();
         }
 
-        public void removeTable(int _tablenumber)
+        public List<FoodItem> showMenuesItem()
         {
-            if (_IdataStorageRepository.doesTableExist(_tablenumber))
-            {
-                _IdataStorageRepository.removeTableByTableNumber(_tablenumber);
-            }
-        }
-
-        public List<Table> showAvailableTables()
-        {
-            tableResponse td = new tableResponse();
-            foreach (KeyValuePair<int, Table> t in _IdataStorageRepository.GetTableDictionary())
-            {
-                td.tablelist.Add(t.Value);
-            }
-            return td.tablelist;
-        }
-
-        public List<Fooditem> showMenuesItem()
-        {
-            foodItemResponse fd = new foodItemResponse();
-            foreach (KeyValuePair<int, Fooditem> fditem in _IdataStorageRepository.GetFoodDictionary())
-            {
-                fd.fooditemlist.Add(fditem.Value);
-            }
-            return fd.fooditemlist;
+            return _IdataStorageRepository.GetFood();
         }
 
         public void addTable(TableRequestDto tableRequestPayload)
@@ -150,43 +139,93 @@ namespace RestaurantWebAPIProject.BO.Implementation
                 throw new BadRequestException("Table Id is already exist");
             }
 
-            Table t = new Table();
-            t.tableNumber = tableRequestPayload.tableNumber;
-            t.isTableOccupied = false;
-            _IdataStorageRepository.AddTable(tableRequestPayload.tableNumber,t);
+            RestaurantTable table = new RestaurantTable()
+            {
+                TableNumber = tableRequestPayload.tableNumber,
+                IsTableOccupied = false
+            };
+           
+            _IdataStorageRepository.AddTable(table);
         }
 
         public void addFoodItem(FoodItemRequestDto foodItemRequestPayload)
         {
-            if(_IdataStorageRepository.doesFoodExist(foodItemRequestPayload.foodItemId))
+            if(_IdataStorageRepository.doesFoodExist(foodItemRequestPayload.foodName))
             {
-                throw new BadRequestException("Food Item Id already exist");
+                throw new BadRequestException("Food Name already exist");
             }
 
-            Fooditem fd=new Fooditem();
-            fd.foodItemId = foodItemRequestPayload.foodItemId;
-            fd.foodItemName=foodItemRequestPayload.foodName;
-            fd.foodPrice= foodItemRequestPayload.foodPrice;
+            FoodItem fd = new FoodItem
+            {
+                FoodItemName = foodItemRequestPayload.foodName,
+                FoodPrice = foodItemRequestPayload.foodPrice
+            };
 
-            _IdataStorageRepository.AddFood(foodItemRequestPayload.foodItemId,fd);
+            _IdataStorageRepository.AddFood(fd);
         }
 
         public void CompletePayment(int tableNumber)
         {
-            if(!_IdataStorageRepository.doesTableExist(tableNumber))
+            RestaurantTable table = _IdataStorageRepository.getTableByTableNumber(tableNumber);
+
+            if(table==null)
             {
                 throw new NotFoundException("Table does not exist");
             }
 
-            Table table = _IdataStorageRepository.getTableByTableNumber(tableNumber);
+            Common.Models.Entities.Order? order = _IdataStorageRepository.GetActiveOrder(table.TableId);
 
-            if(table.orderlist==null || table.orderlist.Count==0)
+            if (order == null)
             {
-                throw new BadRequestException("No Active Order found for this table");
+                throw new BadRequestException(
+                    "No active order found for this table");
             }
 
-            table.orderlist.Clear();
-            table.isTableOccupied = false;
+            order.Status = "Completed";
+            order.CompletedAt = DateTime.UtcNow;
+
+            table.IsTableOccupied = false;
+
+            _IdataStorageRepository.SaveChanges();
+        }
+
+        public OrderResponseDto GetActiveOrder(int tableNumber)
+        {
+            RestaurantTable? table =
+                _IdataStorageRepository.getTableByTableNumber(tableNumber);
+
+            if (table == null)
+            {
+                throw new NotFoundException("Table does not exist");
+            }
+
+            Common.Models.Entities.Order? order =
+                _IdataStorageRepository.GetActiveOrder(table.TableId);
+
+            if (order == null)
+            {
+                throw new NotFoundException("No active order found for this table");
+            }
+
+            OrderResponseDto response = new OrderResponseDto
+            {
+                OrderId = order.OrderId,
+                TableNumber = table.TableNumber,
+                Status = order.Status
+            };
+
+            foreach (OrderItem item in order.OrderItems)
+            {
+                response.Items.Add(new OrderItemResponseDto
+                {
+                    FoodItemId = item.FoodItemId,
+                    FoodItemName = item.FoodItem.FoodItemName,
+                    FoodPrice = item.FoodItem.FoodPrice,
+                    Quantity = item.Quantity
+                });
+            }
+
+            return response;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using RestaurantWebAPIProject.Common.Models;
+using RestaurantWebAPIProject.Common.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,24 +10,16 @@ namespace RestaurantWebAPIProject.DataAccess.Repository
 {
     public interface IDataStorageRepository
     {
-        Dictionary<int, Table> GetTableDictionary();
+        List<RestaurantTable>GetTable();
+        RestaurantTable getTableByTableNumber(int tableNumber);
 
-        Dictionary<int, Fooditem> GetFoodDictionary();
-        Table getTableByTableNumber(int tableNumber);
-
-        void AddTable(int tableNumber, Table table);
-        void AddFood(int foodnumber, Fooditem food);
-        Fooditem getFoodItemByTableNumber(int tableNumber);
-
-        void StoreFoodItem(int tableNumber, Fooditem fooditem);
+        void AddTable(RestaurantTable table);
+        void AddFood(FoodItem food);
         bool doesTableExist(int tablenumber);
-        bool doesFoodExist(int foodnumber);
-        Fooditem getFoodItemByFoodItemNumber(int foodnumber);
-        void removeFoodItemByFoodItemNumber(int foodnumber);
-        void removeTableByTableNumber(int tablenumber);
-        void initMenu();
-        void initTables();
-
-        int GetNextOrderId();
+        bool doesFoodExist(string foodName);
+        List<FoodItem> GetFood();
+        Common.Models.Entities.Order? GetActiveOrder(int tableId);
+        void AddOrder(Common.Models.Entities.Order order);
+        void SaveChanges();
     }
 }

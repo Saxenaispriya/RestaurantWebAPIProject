@@ -3,11 +3,14 @@ using RestaurantWebAPIProject.BO.Implementation;
 using RestaurantWebAPIProject.BO.Interface;
 using RestaurantWebAPIProject.DataAccess.Repository;
 using RestaurantWebAPIProject.Middleware;
+using RestaurantWebAPIProject.DataAccess;
+using Microsoft.EntityFrameworkCore;
+using RestaurantWebAPIProject.DataAccess.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<IRestaurantService, RestaurantService>();//add service class
-builder.Services.AddSingleton<IDataStorageRepository,DataStorageRepository>();//for storage
+builder.Services.AddScoped<IDataStorageRepository,DataStorageRepository>();//for storage
 builder.Services.AddTransient<GlobalExceptionMiddleware>();
 
 //builder.Services.AddControllers()
@@ -45,6 +48,8 @@ builder.Services.AddCors(options =>
                   .AllowAnyMethod();
         });
 });
+
+builder.Services.AddDbContext<RestaurantDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("RestaurantDbConnection")));
 
 var app = builder.Build();
 

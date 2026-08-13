@@ -1,4 +1,7 @@
-﻿using RestaurantWebAPIProject.Common.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using RestaurantWebAPIProject.Common.Models;
+using RestaurantWebAPIProject.Common.Models.Entities;
+using RestaurantWebAPIProject.DataAccess.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,108 +12,65 @@ namespace RestaurantWebAPIProject.DataAccess.Repository
 {
     public class DataStorageRepository:IDataStorageRepository
     {
-        private Dictionary<int, Fooditem> mydictfooditem = new Dictionary<int, Fooditem>();
-        private Dictionary<int, Table> mydicttable = new Dictionary<int, Table>();
+        private RestaurantDbContext _context;
         private int _lastOrderId = 0;
-        public DataStorageRepository()
+
+        public DataStorageRepository(RestaurantDbContext context)
         {
-            initMenu();
-            initTables();
+            _context = context;
         }
 
-        public Dictionary<int, Table> GetTableDictionary()
+        public List<RestaurantTable> GetTable()
         {
-            return mydicttable;
-        }
-       
-        public Dictionary<int, Fooditem> GetFoodDictionary()
-        {
-            return mydictfooditem;
+            return _context.RestaurantTables.ToList();  
         }
 
-        public Table getTableByTableNumber(int tableNumber)
+        public List<FoodItem> GetFood()
         {
-            return mydicttable[tableNumber];
+            return _context.FoodItems.ToList();
         }
 
-        public void AddTable(int tableNumber, Table table)
+        public RestaurantTable getTableByTableNumber(int tableNumber)
         {
-            mydicttable.Add(tableNumber, table);
+            return _context.RestaurantTables.FirstOrDefault(t => t.TableNumber == tableNumber);
         }
 
-        public void AddFood(int foodnumber, Fooditem food)
+        public void AddTable(RestaurantTable table)
         {
-            mydictfooditem.Add(foodnumber, food);
+            _context.RestaurantTables.Add(table);
+            _context.SaveChanges();
         }
 
-
-        public Fooditem getFoodItemByTableNumber(int tableNumber)
+        public void AddFood(FoodItem food)
         {
-            return mydictfooditem[tableNumber];
+            _context.FoodItems.Add(food);
+            _context.SaveChanges();
         }
 
-        public void StoreFoodItem(int tableNumber, Fooditem fooditem)
-        {
-            mydictfooditem.Add(tableNumber, fooditem);
-        }
         public bool doesTableExist(int tablenumber)
         {
-            return mydicttable.ContainsKey(tablenumber);
+            return _context.RestaurantTables.Any(t => t.TableNumber == tablenumber);
         }
-        public bool doesFoodExist(int foodnumber)
+        public bool doesFoodExist(string foodName)
         {
-            return mydictfooditem.ContainsKey(foodnumber); 
-   
-        }
-        public Fooditem getFoodItemByFoodItemNumber(int foodnumber)
-        {
-            return mydictfooditem[foodnumber];
-        }
-        public void removeFoodItemByFoodItemNumber(int foodnumber)
-        {
-            mydictfooditem.Remove(foodnumber);
-        }
-        public void removeTableByTableNumber(int tablenumber)
-        {
-            mydicttable.Remove(tablenumber);
+            return _context.FoodItems.Any(f => f.FoodItemName == foodName);
         }
 
-        public void initMenu()
+        public void AddOrder(Common.Models.Entities.Order order)
         {
-            var itemList = new List<string>(){
-                "No food", "Dal Fry", "Rice", "Kadhai Panner"
-            };
-
-            var foodPriceList = new List<int>(){
-             0,100, 200, 400
-            };
-
-            for (int i = 0; i < itemList.Count; i++)
-            {
-                Fooditem foodItem = new Fooditem();
-                foodItem.foodItemId = i;
-                foodItem.foodItemName = itemList[i];
-                foodItem.foodPrice = foodPriceList[i];
-                mydictfooditem.Add(i, foodItem);
-            }
-        }
-        public void initTables()
-        {
-            for (int i = 1; i <= 10; i++)
-            {
-                Table t = new Table();
-                t.tableNumber = i;
-                t.isTableOccupied = false;
-                mydicttable.Add(i, t);
-            }
+            _context.Orders.Add(order);
         }
 
-        public int GetNextOrderId()
+        public void SaveChanges()
         {
-            _lastOrderId++;
-            return _lastOrderId;
+            _context.SaveChanges();
         }
 
-
+        public Common.Models.Entities.Order? GetActiveOrder(int tableId)
+        {
+           return _context.Orders.Include(o=>o.OrderItems)
+                .ThenInclude(oi=>oi.FoodItem)
+                .FirstOrDefault(o=>o.RestaurantTableId == tableId && o.Status=="Active");
+        }
     }
 }
