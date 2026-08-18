@@ -26,3 +26,7 @@ jobs:
 
       - name: Build
         run: dotnet build RestaurantWebAPIProject.sln --no-restore
+
+      - name: Build Docker image
+        run: docker build -t restaurant-api -f RestaurantWebAPIProject/Dockerfile .
+        
