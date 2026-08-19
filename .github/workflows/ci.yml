@@ -29,4 +29,16 @@ jobs:
 
       - name: Build Docker image
         run: docker build -t restaurant-api -f RestaurantWebAPIProject/Dockerfile .
+
+      - name: Login to Azure Container Registry
+        run: |
+          echo "${{ secrets.ACR_PASSWORD }}" | docker login restaurantapipriya.azurecr.io \
+            --username "${{ secrets.ACR_USERNAME }}" \
+            --password-stdin
+
+      - name: Tag Docker image
+        run: docker tag restaurant-api:latest restaurantapipriya.azurecr.io/restaurant-api:latest
+
+      - name: Push Docker image to ACR
+        run: docker push restaurantapipriya.azurecr.io/restaurant-api:latest        
         
