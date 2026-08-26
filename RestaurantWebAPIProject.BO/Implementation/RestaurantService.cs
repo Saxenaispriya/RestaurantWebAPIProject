@@ -28,7 +28,7 @@ namespace RestaurantWebAPIProject.BO.Implementation
             _IdataStorageRepository = dataStorageService;
         }
 
-        public void Do_Orders(OrderRequestDto orderRequestPayload)
+        public int Do_Orders(OrderRequestDto orderRequestPayload)
         {
             RestaurantTable table = _IdataStorageRepository.getTableByTableNumber(orderRequestPayload.tablenumber);
 
@@ -78,6 +78,8 @@ namespace RestaurantWebAPIProject.BO.Implementation
             table.IsTableOccupied = true;
 
             _IdataStorageRepository.SaveChanges();
+
+            return order.OrderId;
         }
 
         public int generateBill(int _tablenumber)

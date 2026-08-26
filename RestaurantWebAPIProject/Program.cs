@@ -6,12 +6,16 @@ using RestaurantWebAPIProject.Middleware;
 using RestaurantWebAPIProject.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using RestaurantWebAPIProject.DataAccess.Data;
+using RestaurantWebAPIProject.Messaging;
 
 var builder = WebApplication.CreateBuilder(args);
+
 
 builder.Services.AddScoped<IRestaurantService, RestaurantService>();//add service class
 builder.Services.AddScoped<IDataStorageRepository,DataStorageRepository>();//for storage
 builder.Services.AddTransient<GlobalExceptionMiddleware>();
+
+builder.Services.AddSingleton<ServiceBusMessageSender>();
 
 //builder.Services.AddControllers()
 //    .AddNewtonsoftJson(options =>

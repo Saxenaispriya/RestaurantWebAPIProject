@@ -15,7 +15,7 @@ namespace RestaurantWebAPIProject.BO.Interface
        // void removeFooditem(int _fooditem);
         List<RestaurantTable> showAvailableTables();
         List<FoodItem> showMenuesItem();
-        void Do_Orders(OrderRequestDto orderRequestPayload);
+        int Do_Orders(OrderRequestDto orderRequestPayload);
         int generateBill(int _tablenumber);
         void addTable(TableRequestDto tableRequestPayload);
         void addFoodItem(FoodItemRequestDto foodItemRequestPayload);

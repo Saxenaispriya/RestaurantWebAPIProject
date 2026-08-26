@@ -2,6 +2,9 @@
 using RestaurantWebAPIProject.BO.Interface;
 using RestaurantWebAPIProject.Common.Models;
 using RestaurantWebAPIProject.Common.Dtos;
+using Azure.Messaging.ServiceBus;
+using RestaurantWebAPIProject.Messaging;
+using System.Text.Json;
 
 namespace RestaurantWebAPIProject.Controllers
 {
@@ -10,15 +13,28 @@ namespace RestaurantWebAPIProject.Controllers
     public class RestaurantController : Controller
     {
         private readonly IRestaurantService _restaurantService;
-        public RestaurantController(IRestaurantService restaurantService)
+        private readonly ServiceBusMessageSender _messageSender;
+        public RestaurantController(IRestaurantService restaurantService,ServiceBusMessageSender messageSender)
         {
             _restaurantService = restaurantService;
+            _messageSender = messageSender;
         }
 
         [HttpPost("do_OrderRoute")]
-        public IActionResult do_Order([FromBody] OrderRequestDto orderRequestPayload)
+        public async Task<IActionResult> do_Order([FromBody] OrderRequestDto orderRequestPayload)
         {
-            _restaurantService.Do_Orders(orderRequestPayload);
+           int orderId= _restaurantService.Do_Orders(orderRequestPayload);
+
+            var orderCreatedMessage = new OrderCreatedMessage
+            {
+                OrderId = orderId,
+                TableNumber = orderRequestPayload.tablenumber,
+                Status = "OrderCreated"
+            };
+
+            var message=JsonSerializer.Serialize(orderCreatedMessage);  
+
+            await _messageSender.SendMessageAsync(message);
             return Ok();
         }
 

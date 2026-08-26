@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantWebAPIProject.BO"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantWebAPIProject.DataAccess", "RestaurantWebAPIProject.DataAccess\RestaurantWebAPIProject.DataAccess.csproj", "{46949A96-09D6-41F7-8BEE-3FC4DA1CFA64}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantOrderProcessorFunction", "RestaurantOrderProcessorFunction\RestaurantOrderProcessorFunction.csproj", "{EF1C769F-327E-43D9-89D0-45EDA80C58E2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,8 +35,15 @@ Global
 		{46949A96-09D6-41F7-8BEE-3FC4DA1CFA64}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46949A96-09D6-41F7-8BEE-3FC4DA1CFA64}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46949A96-09D6-41F7-8BEE-3FC4DA1CFA64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF1C769F-327E-43D9-89D0-45EDA80C58E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF1C769F-327E-43D9-89D0-45EDA80C58E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF1C769F-327E-43D9-89D0-45EDA80C58E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF1C769F-327E-43D9-89D0-45EDA80C58E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F652F163-79D8-4ED0-95DD-2AA53552A0BC}
 	EndGlobalSection
 EndGlobal
