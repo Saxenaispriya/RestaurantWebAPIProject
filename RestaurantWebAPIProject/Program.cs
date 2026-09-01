@@ -7,6 +7,7 @@ using RestaurantWebAPIProject.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using RestaurantWebAPIProject.DataAccess.Data;
 using RestaurantWebAPIProject.Messaging;
+using Azure.Storage.Blobs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,15 @@ builder.Services.AddScoped<IDataStorageRepository,DataStorageRepository>();//for
 builder.Services.AddTransient<GlobalExceptionMiddleware>();
 
 builder.Services.AddSingleton<ServiceBusMessageSender>();
+
+builder.Services.AddSingleton(sp =>
+{
+    var configuration = sp.GetRequiredService<IConfiguration>();
+    var connectionString =
+        configuration["AzureBlobStorage:ConnectionString"];
+
+    return new BlobServiceClient(connectionString);
+});
 
 //builder.Services.AddControllers()
 //    .AddNewtonsoftJson(options =>
@@ -27,6 +37,8 @@ builder.Services.AddSingleton<ServiceBusMessageSender>();
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+builder.Services.AddHealthChecks();
 
 builder.Services.AddApplicationInsightsTelemetry();
 
@@ -78,5 +90,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapHealthChecks("/health");
 
 app.Run();
