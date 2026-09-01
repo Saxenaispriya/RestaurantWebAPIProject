@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: restaurant-api-deployment
+
+spec:
+  replicas: 3
+
+  selector:
+    matchLabels:
+      app: restaurant-api
+
+  template:
+    metadata:
+      labels:
+        app: restaurant-api
+
+    spec:
+      containers:
+        - name: restaurant-api
+          image: restaurant-api:latest
+          imagePullPolicy: Never
+
+          ports:
+            - containerPort: 8080
+
+          # Readiness: Is the API ready to receive traffic?
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+
+          # Liveness: Is the API still healthy/alive?
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 10
+
+          resources:
+            requests:
+              cpu: "100m"
+            limits:
+              cpu: "500m"
+
+          env:
+            # Non-sensitive values from ConfigMap
+            - name: RestaurantName
+              valueFrom:
+                configMapKeyRef:
+                  name: restaurant-api-config
+                  key: RestaurantName
+
+            - name: AppMode
+              valueFrom:
+                configMapKeyRef:
+                  name: restaurant-api-config
+                  key: AppMode
+
+            # Azure SQL connection string from Secret
+            - name: ConnectionStrings__RestaurantDbConnection
+              valueFrom:
+                secretKeyRef:
+                  name: restaurant-api-secrets
+                  key: ConnectionStrings__RestaurantDbConnection
+
+            # Application Insights connection string from Secret
+            - name: ApplicationInsights__ConnectionString
+              valueFrom:
+                secretKeyRef:
+                  name: restaurant-api-secrets
+                  key: ApplicationInsights__ConnectionString
